@@ -43,7 +43,7 @@ app.get('/check-registration', async(req, res)=>{
 
         res.json({
             success:true,
-            link:"http://localhost:5173/registration-Form"
+            link:"https://gandhicommunitycollege-registration.vercel.app/registration-Form"
         })
 
    
