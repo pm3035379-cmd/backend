@@ -18,38 +18,33 @@ const  Registration = mongoose.model(
   registrationSchema
 );
 
-app.get('/check-registration', async(req, res)=>{
+app.get('/check-registration', async (req, res) => {
 
-   
-    let data= await Registration.findOne();
-    if(!data){
-        data=new Registration({
-            opened:false
+    let data = await Registration.findOne();
+
+    if (!data) {
+        data = new Registration({
+            opened: false
         });
 
         await data.save();
     }
 
-    if(data.opened){
+    if (data.opened) {
         return res.json({
             success: false,
-            message:"Registration filled successfully"
+            message: "Registration filled successfully"
         });
+    }
 
-         };
+    data.opened = true;
+    await data.save();
 
-        data.opened= true;
-        await data.save();
-
-        res.json({
-            success:true,
-            link:"https://gandhicommunitycollege-registration.vercel.app/registration-Form"
-        })
-
-   
-
+    res.json({
+        success: true
     });
 
+});
 
     app.listen(8000,()=>{
         console.log("server running ");
